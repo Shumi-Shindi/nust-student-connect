@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - ABC Corporation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+  
+  <script>
+window.onload = function() {
+alert("Welcome to Abc Coopration!");
+};
+//browser detection//
+var userBrowser = navigator.userAgent;
+
+if (userBrowser.indexOf("Edge") > -1) {
+    document.body.style.backgroundColor = "lightblue";
+} else if (userBrowser.indexOf("Firefox") > -1) {
+    document.body.style.backgroundColor = "lightgreen";
+} else {
+    alert("You are using an unsupported browser!");
+}
+
+    // Function for confirmation dialog
+    function confirmation() {
+      return confirm("Are you sure you want to proceed?");
+    }
+
+    // Function to validate form inputs
+    function validateForm() {
+      // Get input field values
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let address = document.getElementById("address").value;
+      let city = document.getElementById("city").value;
+      let zipcode = document.getElementById("zipcode").value;
+      let card = document.getElementById("card").value;
+      let expdate = document.getElementById("expdate").value;
+      let cvv = document.getElementById("cvv").value;
+
+      // Basic validation to check if fields are filled
+      if (name === "" || email === "" || address === "" || city === "" || zipcode === "" || card === "" || expdate === "" || cvv === "") {
+        alert("Please fill out all required fields.");
+        return false; // Prevent form submission
+      }
+
+      // Email validation (basic regex)
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+
+      // Zipcode validation (checking if it's a number)
+      if (isNaN(zipcode) || zipcode.length < 4 || zipcode.length > 6) {
+        alert("Please enter a valid zip code.");
+        return false;
+      }
+
+      // Credit Card validation (just checking length and if it's a number)
+      if (isNaN(card) || card.length !== 16) {
+        alert("Please enter a valid 16-digit credit card number.");
+        return false;
+      }
+
+      // Expiration date validation (basic format MM/YY)
+      let expDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+      if (!expDatePattern.test(expdate)) {
+        alert("Please enter a valid expiration date (MM/YY).");
+        return false;
+      }
+
+      // CVV validation (should be a 3-digit number)
+      if (isNaN(cvv) || cvv.length !== 3) {
+        alert("Please enter a valid 3-digit CVV.");
+        return false;
+      }
+
+      // If all fields are valid, confirm the purchase
+      return confirmation();
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-shopping-cart header-icon"></i>NUST Student Connect</h1>
+    <nav>
+      <ul>
+        <li><a href="HomePage.html">Home</a></li>
+        <li><a href="products.html">Vacancies</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+      <!-- Cart/Checkout Button -->
+      <div class="cart-container">
+        <button type="button" onclick="window.location.href='checkoutpage.html'">
+          <i class="fas fa-shopping-cart"></i> Checkout
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Checkout</h1>
+    <p>Please review your order details and complete your purchase.</p>
+    
+    <form class="checkout-form" onsubmit="return validateForm()">
+      <h2>Billing Information</h2>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="address">Shipping Address:</label>
+      <input type="text" id="address" name="address" required>
+      
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" value="Windhoek" required>
+      
+      <label for="zipcode">Zip Code:</label>
+      <input type="text" id="zipcode" name="zipcode" required>
+      
+      <h2>Payment Information</h2>
+      <label for="card">Credit Card Number:</label>
+      <input type="text" id="card" name="card" required>
+      
+      <label for="expdate">Expiration Date (MM/YY):</label>
+      <input type="text" id="expdate" name="expdate" required>
+      
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" name="cvv" required>
+      
+      <!-- Updated Button with Confirmation and Validation -->
+      <button type="submit">Complete Purchase</button>
+    </form>
+  </main>
+
+  <footer>
+    <div class="social-media">
+      <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <p>&copy; 2024 ABC Corporation. All rights reserved.</p>
+  </footer>
+</body>
+</html>
